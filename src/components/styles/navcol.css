@@ -1,0 +1,21 @@
+.absolute {
+    position: absolute;
+    /* margin: 2vw; */
+    background-color: rgb(179, 176, 176);
+    width: 100%;
+    padding: 2vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div#logo {
+    margin: 0;
+    /* background-color: hotpink; */
+}
+
+div#divtobutton:hover {
+    background-color: rgb(146, 144, 144);
+    cursor: pointer;
+}

@@ -1,0 +1,58 @@
+header {
+    background-color: rgb(151, 151, 151);
+    height: 10vh;
+}
+
+main {
+    background-color: white;
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+div.chats {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
+    background-color: rgb(253, 253, 253);
+    margin: 1vw 0 1vw 0;
+}
+
+div.chats:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+img.profilepic {
+    width: 6vw;
+    height: 6vw;
+    border-radius: 50%;
+    margin: auto;
+    margin: 1vw;
+}
+
+div.inside {
+    margin-left: 1vw;
+    width: 90%;
+}
+
+.nomar {
+    margin: 0;
+}
+
+footer {
+    background-color: rgb(99, 99, 99);
+    height: 30vh;
+}
+
+div.top {
+    margin: 0 1vw 0 1vw;
+    padding-top: 1vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+div#input {
+    width: 98%;
+    margin: auto;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
