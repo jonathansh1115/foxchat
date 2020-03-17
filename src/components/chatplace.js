@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './styles/chatplace.css'
 
 // icons
@@ -15,6 +15,7 @@ import moment from 'moment'
 import Socket from '../utils/socket'
 
 export default () => {
+    const bottom = useRef()
 
     const [myusername, setMyusername] = useState('')
     const [value, setValue] = useState('')
@@ -22,10 +23,7 @@ export default () => {
 
     useEffect(() => {
         Socket.on('RECEIVE_BROADCAST', (data) => {
-            console.log(data)
-            let chatscopy = [...chats]
-            chatscopy.push(data)
-            setChats(chatscopy)
+            setChats(oldChats => [...oldChats, data])
         })
 
         Socket.on("HAS_ERROR", e => {
@@ -36,6 +34,10 @@ export default () => {
             setMyusername(data.username)
         })
     }, [])
+
+    useEffect(() => {
+        bottom.current.scrollIntoView()
+    }, [chats])
 
     const send = () => {
         const trimmedValue = value.trim()
@@ -81,7 +83,7 @@ export default () => {
                         </div>
                     ))
                 }
-
+                <span ref={bottom}></span>
             </main>
 
             <footer>
@@ -115,6 +117,11 @@ export default () => {
                     <textarea className="form-control" rows="5"
                     value={value} 
                     onInput={e => setValue(e.target.value)}
+                    onKeyUp={e => {
+                        if (e.keyCode == 13) {
+                            send()
+                        }
+                    }}
                     />
                 </div>
             </footer>

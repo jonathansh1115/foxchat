@@ -1,21 +1,26 @@
-.absolute {
-    position: relative;
-    /* margin: 2vw; */
-    background-color: rgb(179, 176, 176);
-    width: 100%;
-    padding: 2vw;
+div#top {
     height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgb(179, 176, 176);
 }
 
-div#logo {
-    margin: 0;
-    /* background-color: hotpink; */
+div#me {
+    height: 10vh;
+    background-color: rgb(219, 219, 219);
+    display: flex;
+    align-items: center;
 }
 
-div#divtobutton:hover {
-    background-color: rgb(146, 144, 144);
-    cursor: pointer;
+div#onlineusers {
+    height: 80vh;
+    background-color: rgb(247, 247, 247);
+}
+
+#onlinedot {
+    background-color: rgb(11, 201, 11);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
 }

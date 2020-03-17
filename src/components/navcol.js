@@ -26,38 +26,39 @@ export default () => {
 
     return (
         <div>
-            <Nav vertical style={{backgroundColor:'rgb(238, 238, 238)'}}>
-                <NavItem>
-                    <div className='absolute' style={{top:'0'}}>
-                        <div id='logo' style={{display:'flex'}}>
-                            <img src='../fox.svg' alt='' style={{height:'5vh'}} />
-                            <h3>fox chat</h3>
-                        </div>
-                    </div>
-                </NavItem>
 
+            <div id='top'>
+                <div>
+                    <div id='logo' style={{display:'flex'}}>
+                        <img src='../fox.svg' alt='' style={{height:'5vh'}} />
+                        <h3>fox chat</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div id='me'>
+                <div style={{paddingLeft:'2vw'}}>
+                    <h5>{myusername} (you)</h5>
+                </div>
+            </div>
+
+            <div id='onlineusers'>
                 {
                     onlineuser.map((item) => {
                         if (item.username !== myusername) {
                             return (
-                                <NavItem>
-                                    <div className='absolute'>
-                                        <h5>{item.username}</h5>
+                                    <div style={{paddingLeft:'2vw', display:'flex', alignItems:'center', marginBottom:'1vh'}}>
+                                        <div id='onlinedot'></div>
+                                        &nbsp;&nbsp;
+                                        <h5 style={{margin:'0'}}>{item.username}</h5>
                                     </div>
-                                </NavItem>
                             )
                         }
                         
                     })
                 }
-
-                <NavItem>
-                    <div className='absolute'>
-                        <h5>{myusername} (you)</h5>
-                    </div>
-                </NavItem>
-                
-            </Nav>
+            </div>
+           
         </div>
     )
 }
