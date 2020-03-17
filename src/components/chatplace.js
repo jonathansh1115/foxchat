@@ -16,24 +16,46 @@ import Socket from '../utils/socket'
 
 export default () => {
 
+    const [myusername, setMyusername] = useState('')
     const [value, setValue] = useState('')
     const [chats, setChats] = useState([])
+
+    useEffect(() => {
+        Socket.on('RECEIVE_BROADCAST', (data) => {
+            console.log(data)
+            let chatscopy = [...chats]
+            chatscopy.push(data)
+            setChats(chatscopy)
+        })
+
+        Socket.on("HAS_ERROR", e => {
+            console.log(e)
+        })
+
+        Socket.on('GET_CURRENT_USER', (data) => {
+            setMyusername(data.username)
+        })
+    }, [])
 
     const send = () => {
         const trimmedValue = value.trim()
         if (trimmedValue !== '') {
             console.log(trimmedValue)
-            setValue('')
         } else {
             console.log('nothing')
         }
+        
+        let ob = {
+            username: myusername,
+            message: value,
+            timestamp: Date.now()
+        }
+
+        Socket.emit('BROADCAST_MESSAGE', ob)
+
+        setValue('')
     }
 
-    useEffect(() => {
-        Socket.on('RECEIVE_BROADCAST', (data) => {
-            setChats(data)
-        })
-    }, [])
     
     return (
         <div>
