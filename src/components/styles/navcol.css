@@ -1,5 +1,5 @@
 .absolute {
-    position: absolute;
+    position: relative;
     /* margin: 2vw; */
     background-color: rgb(179, 176, 176);
     width: 100%;

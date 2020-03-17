@@ -17,11 +17,7 @@ import Socket from '../utils/socket'
 export default () => {
 
     const [value, setValue] = useState('')
-    const [chats, setChats] = useState([{username: 'Edwind', message: 'What did the ocean say to another ocean?', timestamp: 1544532325758},
-    {username: 'Liren', message: 'sea you later?', timestamp: 1544532341078},
-    {username: 'Edwind', message: 'Nothing. It just waved', timestamp: 1544532347412},
-    {username: 'Josh', message: "I'm leaving this chatroom", timestamp: 1544532402998},
-])
+    const [chats, setChats] = useState([])
 
     const send = () => {
         const trimmedValue = value.trim()
@@ -34,10 +30,8 @@ export default () => {
     }
 
     useEffect(() => {
-        Socket.emit('NEW_USER')
-
-        Socket.on('GET_CURRENT_USER', newUser => {
-            
+        Socket.on('RECEIVE_BROADCAST', (data) => {
+            setChats(data)
         })
     }, [])
     
@@ -66,18 +60,6 @@ export default () => {
                     ))
                 }
 
-                {/* <div className='chats'>
-                    <div style={{width:'11%', backgroundColor:'blue'}}>
-                        <img className='profilepic' src='https://api.adorable.io/avatars/400/abott@adorable.io.png' alt='' />
-                    </div>
-                    <div className='inside'>
-                        <div style={{display:'flex', justifyContent:'space-between'}}>
-                            <h6 className='nomar'>Name</h6>
-                            <p className='nomar'>18:00</p>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis soluta, dolore recusandae unde et neque saepe possimus labore iste modi nostrum sit facilis eum a beatae aspernatur provident repellendus explicabo!</p>
-                    </div>
-                </div> */}
             </main>
 
             <footer>

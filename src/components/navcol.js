@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles/navcol.css'
 
 // libraries
@@ -9,7 +9,20 @@ import Socket from '../utils/socket'
 
 export default () => {
 
-    Socket.on('')
+    const [myusername, setMyusername] = useState('')
+    const [onlineuser, setOnlineuser] = useState([])
+
+    useEffect(() => {
+        Socket.emit('NEW_USER')
+
+        Socket.on('GET_CURRENT_USER', (data) => {
+            setMyusername(data.username)
+        })
+
+        Socket.on('UPDATE_USER_LIST', (data) => {
+            setOnlineuser(data)
+        })
+    }, [])
 
     return (
         <div>
@@ -23,17 +36,27 @@ export default () => {
                     </div>
                 </NavItem>
 
-                <NavItem>
-                    <h1>Jonathan</h1>
-                </NavItem>
+                {
+                    onlineuser.map((item) => {
+                        if (item.username !== myusername) {
+                            return (
+                                <NavItem>
+                                    <div className='absolute'>
+                                        <h5>{item.username}</h5>
+                                    </div>
+                                </NavItem>
+                            )
+                        }
+                        
+                    })
+                }
 
                 <NavItem>
-                    <div id='divtobutton' className='absolute' style={{bottom:'0'}}>
-                        <div id='logo' style={{display:'flex'}}>
-                            <h3>Logout</h3>
-                        </div>
+                    <div className='absolute'>
+                        <h5>{myusername} (you)</h5>
                     </div>
                 </NavItem>
+                
             </Nav>
         </div>
     )
