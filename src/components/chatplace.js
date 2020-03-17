@@ -43,17 +43,16 @@ export default () => {
         const trimmedValue = value.trim()
         if (trimmedValue !== '') {
             console.log(trimmedValue)
+            let ob = {
+                username: myusername,
+                message: value,
+                timestamp: Date.now()
+            }
+    
+            Socket.emit('BROADCAST_MESSAGE', ob)
         } else {
             console.log('nothing')
         }
-        
-        let ob = {
-            username: myusername,
-            message: value,
-            timestamp: Date.now()
-        }
-
-        Socket.emit('BROADCAST_MESSAGE', ob)
 
         setValue('')
     }
